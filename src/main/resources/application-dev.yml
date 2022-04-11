@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/spring-boot-practice?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  # Mapper对应的xml路径
+  mapper-locations: classpath:mappers/*Mapper.xml
+  # 设置别名的路径,可避免写全限定类名
+  type-aliases-package: com.xzcoding.practice.entity
+
+logging:
+  level:
+    com.xzcoding: debug
+    com.xzcoding.practice.mapper: trace
