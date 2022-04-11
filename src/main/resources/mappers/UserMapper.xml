@@ -9,7 +9,11 @@
         <result column="real_name" jdbcType="VARCHAR" property="realName"/>
     </resultMap>
 
-    <select id="select" resultMap="baseResultMap">
+    <select id="selectList" resultMap="baseResultMap">
+        select * from user
+    </select>
+
+    <select id="selectById" resultMap="baseResultMap">
         select * from user where id = #{id}
     </select>
 

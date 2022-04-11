@@ -18,9 +18,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/select/{id}")
-    public String select(@PathVariable int id){
-        return userService.select(id).toString();
+    @GetMapping("/list")
+    public String selectList(){
+        return userService.selectList().toString();
+    }
+
+    @GetMapping("/{id}")
+    public String detail(@PathVariable int id){
+        return userService.selectById(id).toString();
     }
 
     @PostMapping("/insert")

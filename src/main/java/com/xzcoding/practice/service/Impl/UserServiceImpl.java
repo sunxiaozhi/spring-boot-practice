@@ -7,6 +7,8 @@ import com.xzcoding.practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * User服务
  *
@@ -19,8 +21,13 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public User select(int id) {
-        return userMapper.select(id);
+    public List<User> selectList() {
+        return userMapper.selectList();
+    }
+
+    @Override
+    public User selectById(int id) {
+        return userMapper.selectById(id);
     }
 
     @Override

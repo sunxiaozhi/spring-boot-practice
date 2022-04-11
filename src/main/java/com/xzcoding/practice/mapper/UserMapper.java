@@ -3,6 +3,8 @@ package com.xzcoding.practice.mapper;
 import com.xzcoding.practice.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * User-Mapper
  *
@@ -11,7 +13,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper {
-    User select(int id);
+    List<User> selectList();
+
+    User selectById(int id);
 
     int insert(User user);
 

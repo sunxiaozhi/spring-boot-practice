@@ -2,6 +2,8 @@ package com.xzcoding.practice.service;
 
 import com.xzcoding.practice.entity.User;
 
+import java.util.List;
+
 /**
  * User服务接口
  *
@@ -9,7 +11,9 @@ import com.xzcoding.practice.entity.User;
  * @date 2022-04-11 15:31
  */
 public interface UserService {
-    User select(int id);
+    List<User> selectList();
+
+    User selectById(int id);
 
     int insert(User user);
 
