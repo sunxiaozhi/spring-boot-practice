@@ -1,11 +1,9 @@
 package com.xzcoding.practice.controller;
 
+import com.xzcoding.practice.entity.User;
 import com.xzcoding.practice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * User控制器
@@ -20,8 +18,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("getUser/{id}")
-    public String getUser(@PathVariable int id){
+    @GetMapping("/select/{id}")
+    public String select(@PathVariable int id){
         return userService.select(id).toString();
+    }
+
+    @PostMapping("/insert")
+    public int insert(@RequestBody User user){
+        return userService.insert(user);
+    }
+
+    @PutMapping("/update")
+    public int update(@RequestBody User user){
+        return userService.update(user);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public int update(@PathVariable String id){
+        return userService.delete(id);
     }
 }

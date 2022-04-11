@@ -7,16 +7,19 @@ package com.xzcoding.practice.entity;
  * @date 2022-04-11 15:31
  */
 public class User {
-    private Integer id;
+    private String id;
+
     private String userName;
-    private String passWord;
+
+    private String password;
+
     private String realName;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -28,12 +31,12 @@ public class User {
         this.userName = userName;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRealName() {
@@ -47,9 +50,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
+                ", password='" + password + '\'' +
                 ", realName='" + realName + '\'' +
                 '}';
     }

@@ -12,4 +12,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
     User select(int id);
+
+    int insert(User user);
+
+    int update(User user);
+
+    int delete(String id);
 }

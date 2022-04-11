@@ -3,14 +3,29 @@
 <mapper namespace="com.xzcoding.practice.mapper.UserMapper">
 
     <resultMap id="baseResultMap" type="com.xzcoding.practice.entity.User">
-        <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="userName" jdbcType="VARCHAR" property="userName" />
-        <result column="passWord" jdbcType="VARCHAR" property="passWord" />
-        <result column="realName" jdbcType="VARCHAR" property="realName" />
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
     </resultMap>
 
     <select id="select" resultMap="baseResultMap">
         select * from user where id = #{id}
     </select>
 
+    <insert id="insert">
+        insert into user (id, user_name, password, real_name) values (
+            #{id},
+            #{userName},
+            #{password},
+            #{realName})
+    </insert>
+
+    <update id="update">
+        update user set user_name = #{userName}, password = #{password}, real_name = #{realName} where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from user where id = #{id}
+    </delete>
 </mapper>

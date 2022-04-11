@@ -1,5 +1,6 @@
 package com.xzcoding.practice.service.Impl;
 
+import cn.hutool.core.util.IdUtil;
 import com.xzcoding.practice.entity.User;
 import com.xzcoding.practice.mapper.UserMapper;
 import com.xzcoding.practice.service.UserService;
@@ -18,7 +19,23 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public User select(int id){
+    public User select(int id) {
         return userMapper.select(id);
+    }
+
+    @Override
+    public int insert(User user) {
+        user.setId(IdUtil.simpleUUID());
+        return userMapper.insert(user);
+    }
+
+    @Override
+    public int update(User user) {
+        return userMapper.update(user);
+    }
+
+    @Override
+    public int delete(String id) {
+        return userMapper.delete(id);
     }
 }

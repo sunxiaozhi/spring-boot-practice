@@ -10,4 +10,10 @@ import com.xzcoding.practice.entity.User;
  */
 public interface UserService {
     User select(int id);
+
+    int insert(User user);
+
+    int update(User user);
+
+    int delete(String id);
 }
