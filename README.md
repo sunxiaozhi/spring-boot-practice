@@ -7,3 +7,5 @@
 * SpringDoc
 * 全局异常处理
 * 统一返回处理
+* Flyway
+* Redis
