@@ -13,8 +13,8 @@ import java.util.List;
  * @author sunhuanzhi
  * @date 2022/4/17 10:26
  */
-public class Main {
-    static String fileLoc = "E:\\bigData\\bigDataIp.txt";
+public class DnsMain {
+    static String fileLoc = "E:\\bigData\\dns\\dns.txt";
 
     public static void findIp() throws IOException, ClassNotFoundException {
         long start = System.currentTimeMillis();
@@ -30,7 +30,7 @@ public class Main {
 
         System.out.println("统计完成，开始计算所有ip中出现频率最高的ip");
         Ip ip = calculateResult(list);
-        System.out.println("访问次数最多的ip是：" + ip.getIp() + ":" + ip.getCount());
+        System.out.println("访问次数最多的ip是：" + ip.getIp() + " 访问次数是：" + ip.getCount());
         long end = System.currentTimeMillis();
         System.out.println("共用时：" + (end - start) + "毫秒");
     }
