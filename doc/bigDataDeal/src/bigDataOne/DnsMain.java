@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2022/4/17 10:26
  */
 public class DnsMain {
-    static String fileLoc = "E:\\bigData\\dns\\dns.txt";
+    static String fileLoc = "..\\source\\dnsData\\dnsData.txt";
 
     public static void findDnsLog() throws IOException, ClassNotFoundException {
         long start = System.currentTimeMillis();
@@ -29,8 +29,8 @@ public class DnsMain {
         System.out.println("统计所有文件共用时：" + (end2 - start1) + " 毫秒");
 
         System.out.println("统计完成，开始计算所有DnsLog中出现频率最高的DnsLog");
-        DnsLog DnsLog = calculateResult(list);
-        System.out.println("访问次数最多的DnsLog是：" + DnsLog.getUrl() + " 访问次数是：" + DnsLog.getCount());
+        DnsLog dnsLog = calculateResult(list);
+        System.out.println("访问次数最多的DnsLog是：" + dnsLog.getUrl() + " 访问次数是：" + dnsLog.getCount());
         long end = System.currentTimeMillis();
         System.out.println("共用时：" + (end - start) + "毫秒");
     }
