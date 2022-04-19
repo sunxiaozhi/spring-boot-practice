@@ -14,7 +14,8 @@ import java.util.List;
  * @date 2022/4/17 10:26
  */
 public class IpMain {
-    static String fileLoc = "E:\\bigData\\dns\\dns.txt";
+    //static String fileLoc = "E:\\bigData\\dns\\dns.txt";
+    static String fileLoc = "E:\\workspace\\spring-boot-practice\\doc\\bigDataDeal\\src\\bigDataOne\\source\\ipData\\ipData.txt";
 
     public static void findIp() throws IOException, ClassNotFoundException {
         long start = System.currentTimeMillis();

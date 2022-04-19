@@ -6,6 +6,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 海量数据处理
@@ -14,7 +16,8 @@ import java.util.List;
  * @date 2022/4/17 10:26
  */
 public class DnsMain {
-    static String fileLoc = "..\\source\\dnsData\\dnsData.txt";
+    static String fileLoc = "E:\\workspace\\spring-boot-practice\\doc\\bigDataDeal\\src\\bigDataOne\\source\\dnsData\\dnsData.txt";
+    //static String fileLoc = "\\..\\source\\dnsData\\dnsData.txt";
 
     public static void findDnsLog() throws IOException, ClassNotFoundException {
         long start = System.currentTimeMillis();
@@ -28,32 +31,35 @@ public class DnsMain {
         long end2 = System.currentTimeMillis();
         System.out.println("统计所有文件共用时：" + (end2 - start1) + " 毫秒");
 
-        System.out.println("统计完成，开始计算所有DnsLog中出现频率最高的DnsLog");
+        System.out.println("统计完成，开始计算所有url中出现频率最高的url");
         DnsLog dnsLog = calculateResult(list);
-        System.out.println("访问次数最多的DnsLog是：" + dnsLog.getUrl() + " 访问次数是：" + dnsLog.getCount());
+        System.out.println("访问次数最多的url是：" + dnsLog.getUrl() + " 访问次数是：" + dnsLog.getCount());
         long end = System.currentTimeMillis();
         System.out.println("共用时：" + (end - start) + "毫秒");
     }
 
     /**
-     * 从每个文件出现频率最高DnsLog中，计算出所有文件中出现频率最高DnsLog。
+     * 从每个文件出现频率最高url中，计算出所有文件中出现频率最高url。
      */
     private static DnsLog calculateResult(List<DnsLog> list) {
-        DnsLog[] DnsLogs = new DnsLog[list.size()];
-        DnsLogs = list.toArray(DnsLogs);
+        DnsLog[] dnsLogs = new DnsLog[list.size()];
+        dnsLogs = list.toArray(dnsLogs);
         int max = 0;
-        for (int j = 1; j < DnsLogs.length; j++) {
-            if (DnsLogs[j].getCount() > DnsLogs[max].getCount()) {
+        for (int j = 1; j < dnsLogs.length; j++) {
+            if (dnsLogs[j].getCount() > dnsLogs[max].getCount()) {
                 max = j;
             }
         }
-        return DnsLogs[max];
+        return dnsLogs[max];
     }
 
     /**
-     * 统计生成的每一个小文件，返回一个List,这个List的每一项就是每个小文件的统计结果，即每个小文件中出现频率最高的DnsLog和出现次数
+     * 统计生成的每一个小文件，返回一个List,这个List的每一项就是每个小文件的统计结果，即每个小文件中出现频率最高的url和出现次数
      */
     private static List<DnsLog> countEverySmallFile() throws FileNotFoundException, IOException {
+        //String pattern = "^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$";
+        //Pattern p = Pattern.compile(pattern);
+
         List<DnsLog> list = new ArrayList<DnsLog>();
         for (int i = 0; i < 1024; i++) {
             File file = new File(fileLoc + i + ".txt");
@@ -63,10 +69,15 @@ public class DnsMain {
                 String dnsLog1 = "";
                 HashMap<String, Integer> hm = new HashMap<String, Integer>();
                 while ((dnsLog1 = br1.readLine()) != null) {
-                    if (!hm.containsKey(dnsLog1)) {
-                        hm.put(dnsLog1, 1);
+                    //Matcher m = p.matcher(dnsLog1);
+                    //boolean mFind = m.find();
+                    String[] dnsLogArray = dnsLog1.split("\t");
+                    if (!hm.containsKey(dnsLogArray[2])) {
+                        //  hm.put(dnsLog1, 1);
+                        hm.put(dnsLogArray[2], 1);
                     } else {
-                        hm.put(dnsLog1, hm.get(dnsLog1) + 1);
+                        //hm.put(dnsLog1, hm.get(dnsLog1) + 1);
+                        hm.put(dnsLogArray[2], hm.get(dnsLogArray[2]) + 1);
                     }
                 }
 
