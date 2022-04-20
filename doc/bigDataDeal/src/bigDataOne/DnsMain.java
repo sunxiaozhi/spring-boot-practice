@@ -3,7 +3,9 @@ package bigDataOne;
 import bigDataOne.entity.DnsLog;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,13 +21,13 @@ public class DnsMain {
     static String fileLoc = "E:\\workspace\\spring-boot-practice\\doc\\bigDataDeal\\src\\bigDataOne\\source\\dnsData\\dnsData.txt";
     //static String fileLoc = "\\..\\source\\dnsData\\dnsData.txt";
 
-    public static void findDnsLog() throws IOException, ClassNotFoundException {
+    public static void findDnsLog() throws IOException {
         long start = System.currentTimeMillis();
         hashToSmallFiles();
         long end1 = System.currentTimeMillis();
         System.out.println("将大文件映射成小文件，用时：" + (end1 - start) + "毫秒");
 
-        System.out.println("映射到小文件完成，开始统计每个小文件中出现频率最高的DnsLog");
+        System.out.println("映射到小文件完成，开始统计每个小文件中出现频率最高的url");
         long start1 = System.currentTimeMillis();
         List<DnsLog> list = countEverySmallFile();
         long end2 = System.currentTimeMillis();
@@ -56,7 +58,7 @@ public class DnsMain {
     /**
      * 统计生成的每一个小文件，返回一个List,这个List的每一项就是每个小文件的统计结果，即每个小文件中出现频率最高的url和出现次数
      */
-    private static List<DnsLog> countEverySmallFile() throws FileNotFoundException, IOException {
+    private static List<DnsLog> countEverySmallFile() throws IOException {
         //String pattern = "^(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$";
         //Pattern p = Pattern.compile(pattern);
 
@@ -104,7 +106,7 @@ public class DnsMain {
     /**
      * 将打文件hash成1024个小文件
      */
-    private static void hashToSmallFiles() throws FileNotFoundException, IOException {
+    private static void hashToSmallFiles() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileLoc));
         String dnsLog = "";
         HashMap<String, FileWriter> fileWriters = new HashMap<String, FileWriter>();
@@ -144,12 +146,24 @@ public class DnsMain {
      * 随机生成DnsLog地址
      */
     private static String generateDnsLog() {
-        StringBuilder dnsLog = new StringBuilder();
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+        StringBuilder ip1 = new StringBuilder();
         for (int i = 0; i < 4; i++) {
             int temp = (int) (Math.random() * 255);
-            dnsLog.append(temp).append(".");
+            ip1.append(temp).append(".");
         }
-        return dnsLog.substring(0, dnsLog.length() - 1);
+        String ip11 = ip1.substring(0, ip1.length() - 1);
+
+        StringBuilder ip2 = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            int temp = (int) (Math.random() * 255);
+            ip2.append(temp).append(".");
+        }
+        String ip22 = ip2.substring(0, ip2.length() - 1);
+
+        return ip11 + "\t" + dateFormat.format(date) + "\twww.zhongfu.net\t" + ip22;
     }
 
     public static void main(String[] args) {
