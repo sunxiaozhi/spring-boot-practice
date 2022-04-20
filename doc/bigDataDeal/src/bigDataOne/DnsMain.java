@@ -115,7 +115,7 @@ public class DnsMain {
             if (fileWriters.containsKey(fileName)) {
                 fw = fileWriters.get(fileName);
             } else {
-                fw = new FileWriter(fileName, true);
+                fw = new FileWriter(fileName, false);
                 fileWriters.put(fileName, fw);
             }
             fw.write(dnsLog + "\n");
